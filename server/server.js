@@ -1,7 +1,13 @@
+
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
+
+// Load environment variables first
+dotenv.config();
+
+// Database connection
 const connectDB = require('./config/db');
 
 // Import routes
@@ -9,14 +15,14 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
-// Load environment variables
-dotenv.config();
+// Import error middleware
+const {
+  notFound,
+  errorHandler
+} = require('./middleware/errorMiddleware');
 
-// Connect to Database
-connectDB();
-
+// Initialize Express
 const app = express();
 
 // Middleware
@@ -44,15 +50,34 @@ app.get('/api/health', (req, res) => {
 
 // Root welcome endpoint
 app.get('/', (req, res) => {
-  res.send('Cartzy E-Commerce REST API is running. Access endpoints via /api/...');
+  res.send(
+    'Cartzy E-Commerce REST API is running. Access endpoints via /api/...'
+  );
 });
 
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
+// Server configuration
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(` Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
+// Start server after MongoDB connection
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(
+        `Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`
+      );
+    });
+
+  } catch (error) {
+    console.error('Server startup failed:', error.message);
+    process.exit(1);
+  }
+};
+
+// Start application
+startServer();
