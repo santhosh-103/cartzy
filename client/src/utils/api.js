@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 const api = axios.create({
@@ -8,14 +7,12 @@ const api = axios.create({
   },
 });
 
-// Automatically add JWT token
 api.interceptors.request.use(
   (config) => {
     const userInfo = localStorage.getItem('userInfo');
 
     if (userInfo) {
       const { token } = JSON.parse(userInfo);
-
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
