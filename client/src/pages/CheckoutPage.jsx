@@ -120,7 +120,7 @@ const CheckoutPage = () => {
         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl font-black text-gray-950">
-              amazon<span className="text-amber-500 text-xs">.in</span>
+              Cart<span className="text-orange-500">zy</span>
             </span>
             <span className="text-gray-400">|</span>
             <h1 className="text-base sm:text-lg font-bold text-gray-800">Checkout</h1>
@@ -531,9 +531,9 @@ const CheckoutPage = () => {
               )}
 
               <p className="text-[11px] text-gray-500 text-center">
-                By placing your order, you agree to Amazon's{' '}
-                <a href="#" className="text-amazon-link hover:underline">privacy notice</a> and{' '}
-                <a href="#" className="text-amazon-link hover:underline">conditions of use</a>.
+                By placing your order, you agree to Cartzy's{' '}
+                <a href="#" className="text-orange-600 hover:underline">privacy notice</a> and{' '}
+                <a href="#" className="text-orange-600 hover:underline">conditions of use</a>.
               </p>
 
               <div className="border-t border-gray-200 pt-3">
@@ -562,7 +562,7 @@ const CheckoutPage = () => {
 
               <div className="bg-gray-50 p-3 rounded text-[11px] text-gray-500 border border-gray-200 space-y-1">
                 <div className="font-bold text-gray-700">How are delivery costs calculated?</div>
-                <div>Amazon Prime members get free Standard delivery on eligible items.</div>
+                <div>Cartzy Prime members get free Standard delivery on eligible items.</div>
               </div>
             </div>
           </div>

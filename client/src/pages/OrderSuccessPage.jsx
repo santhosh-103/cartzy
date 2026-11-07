@@ -58,7 +58,7 @@ const OrderSuccessPage = () => {
           <Truck className="w-6 h-6 text-emerald-700 flex-shrink-0" />
           <div className="text-xs text-emerald-900">
             <div className="font-bold text-sm">Guaranteed Delivery: Tomorrow by 9 PM</div>
-            <div className="mt-0.5">Your package is being prepared for dispatch with Amazon Logistics.</div>
+            <div className="mt-0.5">Your package is being prepared for dispatch with Cartzy Express Logistics.</div>
           </div>
         </div>
 

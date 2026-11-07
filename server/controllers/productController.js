@@ -170,7 +170,7 @@ const createProduct = async (req, res) => {
       description,
       image,
       images: images || [],
-      brand: brand || 'Amazon',
+      brand: brand || 'Cartzy',
       category,
       countInStock: Number(countInStock !== undefined ? countInStock : 10),
       features: Array.isArray(features) ? features : (features ? [features] : []),

@@ -1,164 +1,138 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Lock, Mail, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ShoppingCart, AlertCircle, ShieldCheck, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useToast } from '../context/ToastContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const { login, loading } = useAuth();
-  const { addToast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const redirectUrl = new URLSearchParams(location.search).get('redirect') || '/';
+  const redirect = new URLSearchParams(location.search).get('redirect') || '/';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-
-    if (!email || !password) {
-      setErrorMsg('Please enter both email and password.');
-      return;
-    }
-
+    if (!email || !password) { setErrorMsg('Please enter both email and password.'); return; }
     const res = await login(email, password);
     if (res.success) {
-      // If admin, they might prefer to go to /admin or redirect
-      if (res.data?.isAdmin && redirectUrl === '/') {
-        navigate('/admin');
-      } else {
-        navigate(redirectUrl);
-      }
+      navigate(res.data?.isAdmin && redirect === '/' ? '/admin' : redirect);
     } else {
       setErrorMsg(res.error || 'Invalid credentials');
     }
   };
 
-  // Quick fill helper for testing
-  const handleQuickFill = (role) => {
-    if (role === 'admin') {
-      setEmail('admin@amazon.com');
-      setPassword('admin123');
-    } else {
-      setEmail('user@amazon.com');
-      setPassword('user123');
-    }
+  const quickFill = (role) => {
+    setEmail(role === 'admin' ? 'admin@cartzy.com' : 'user@cartzy.com');
+    setPassword(role === 'admin' ? 'admin123' : 'user123');
     setErrorMsg('');
   };
 
   return (
-    <div className="min-h-screen bg-white py-10 px-4 flex flex-col items-center">
-      {/* Amazon Logo */}
-      <Link to="/" className="mb-6">
-        <span className="text-3xl font-black text-gray-950 tracking-tight flex items-baseline">
-          amazon<span className="text-amber-500 text-base font-bold">.in</span>
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-10">
+      {/* Logo */}
+      <Link to="/" className="flex items-center gap-2 mb-8">
+        <div className="w-9 h-9 bg-orange-500 rounded-xl flex items-center justify-center shadow-md">
+          <ShoppingCart className="w-5 h-5 text-white" />
+        </div>
+        <span className="text-2xl font-black tracking-tight text-slate-900">
+          Cart<span className="text-orange-500">zy</span>
         </span>
       </Link>
 
-      {/* Login Card */}
-      <div className="w-full max-w-sm border border-gray-300 rounded-lg p-6 sm:p-7 shadow-sm bg-white">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in</h1>
+      {/* Card */}
+      <div className="w-full max-w-sm bg-white border border-slate-200 rounded-2xl shadow-card p-7">
+        <h1 className="text-2xl font-black text-slate-900 mb-1">Sign In</h1>
+        <p className="text-xs text-slate-400 mb-5">Welcome back! Sign in to your Cartzy account.</p>
 
         {errorMsg && (
-          <div className="mb-4 p-3 rounded bg-red-50 border border-red-300 text-xs text-red-800 flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-bold">There was a problem</p>
-              <p>{errorMsg}</p>
-            </div>
+          <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+            <div><p className="font-bold">Sign in error</p><p>{errorMsg}</p></div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block font-bold text-gray-800 mb-1">
-              Email or mobile phone number
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-400 rounded text-xs focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
-              placeholder="name@example.com"
-            />
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">Email address</label>
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm bg-white placeholder-slate-400 transition"
+              placeholder="name@example.com" />
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1">
-              <label className="font-bold text-gray-800">Password</label>
-              <a href="#" className="text-amazon-link hover:underline text-[11px]">
-                Forgot your password?
-              </a>
+            <div className="flex justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700">Password</label>
+              <a href="#" className="text-[11px] text-orange-500 hover:underline">Forgot password?</a>
             </div>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-400 rounded text-xs focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
-              placeholder="At least 6 characters"
-            />
+            <div className="relative">
+              <input type={showPw ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm bg-white placeholder-slate-400 pr-10 transition"
+                placeholder="At least 6 characters" />
+              <button type="button" onClick={() => setShowPw(!showPw)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2 px-4 bg-[#ffd814] hover:bg-[#f7ca00] text-gray-950 font-bold rounded-md border border-[#fcd200] shadow-sm text-xs transition active:scale-95 flex items-center justify-center gap-2"
-          >
-            {loading ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-gray-900 border-t-transparent"></div>
-            ) : (
-              <span>Sign In</span>
-            )}
+          <button type="submit" disabled={loading}
+            className="w-full py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-sm shadow-sm transition active:scale-95 flex items-center justify-center gap-2">
+            {loading
+              ? <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+              : 'Sign In to Cartzy'}
           </button>
         </form>
 
-        <p className="text-[11px] text-gray-600 mt-4 leading-relaxed">
-          By continuing, you agree to Amazon's{' '}
-          <a href="#" className="text-amazon-link hover:underline">Conditions of Use</a> and{' '}
-          <a href="#" className="text-amazon-link hover:underline">Privacy Notice</a>.
+        <p className="text-[11px] text-slate-400 mt-4 leading-relaxed text-center">
+          By continuing, you agree to Cartzy's{' '}
+          <a href="#" className="text-orange-500 hover:underline">Terms</a> &amp;{' '}
+          <a href="#" className="text-orange-500 hover:underline">Privacy Policy</a>.
         </p>
 
-        {/* Quick Demo Credentials */}
-        <div className="mt-5 pt-4 border-t border-gray-200">
-          <p className="text-[11px] font-bold text-gray-600 mb-2">⚡ Quick Test Credentials:</p>
-          <div className="grid grid-cols-2 gap-2">
+        {/* Quick fill for demo */}
+        <div className="mt-5 pt-4 border-t border-slate-100">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2.5">
+            ⚡ Quick Test Login (Click to auto-fill)
+          </p>
+          <div className="grid grid-cols-2 gap-2.5">
             <button
               type="button"
-              onClick={() => handleQuickFill('admin')}
-              className="py-1.5 px-2 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded text-[11px] font-bold transition flex items-center justify-center gap-1"
+              onClick={() => quickFill('admin')}
+              className="p-2.5 bg-orange-50 hover:bg-orange-100/80 text-orange-900 border border-orange-200 rounded-xl text-left transition flex flex-col gap-0.5 group"
             >
-              <ShieldCheck className="w-3 h-3 text-amber-600" />
-              <span>Admin Fill</span>
+              <div className="flex items-center gap-1 font-black text-xs text-orange-700">
+                <ShieldCheck className="w-3.5 h-3.5 text-orange-500" />
+                <span>Admin Login</span>
+              </div>
+              <span className="text-[10px] text-orange-600/90 font-medium">admin@cartzy.com</span>
+              <span className="text-[9px] text-slate-400">Pass: admin123</span>
             </button>
+
             <button
               type="button"
-              onClick={() => handleQuickFill('user')}
-              className="py-1.5 px-2 bg-gray-50 hover:bg-gray-100 text-gray-800 border border-gray-300 rounded text-[11px] font-bold transition"
+              onClick={() => quickFill('user')}
+              className="p-2.5 bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200 rounded-xl text-left transition flex flex-col gap-0.5"
             >
-              Customer Fill
+              <div className="flex items-center gap-1 font-black text-xs text-slate-700">
+                <span>Customer</span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-medium">user@cartzy.com</span>
+              <span className="text-[9px] text-slate-400">Pass: user123</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* New to Amazon? */}
-      <div className="w-full max-w-sm mt-6 text-center">
-        <div className="relative flex py-2 items-center">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="flex-shrink mx-3 text-gray-500 text-xs">New to Amazon?</span>
-          <div className="flex-grow border-t border-gray-300"></div>
-        </div>
-
-        <Link
-          to={`/register?redirect=${encodeURIComponent(redirectUrl)}`}
-          className="block w-full py-2 px-4 mt-2 bg-gray-50 hover:bg-gray-100 text-gray-900 text-xs font-semibold rounded-md border border-gray-300 shadow-sm transition"
-        >
-          Create your Amazon account
+      {/* New account */}
+      <div className="mt-5 text-center">
+        <div className="text-xs text-slate-500 mb-3">New to Cartzy?</div>
+        <Link to={`/register?redirect=${encodeURIComponent(redirect)}`}
+          className="px-6 py-2.5 bg-white hover:bg-slate-50 text-slate-800 font-semibold rounded-xl border border-slate-300 text-xs shadow-sm transition">
+          Create your Cartzy account
         </Link>
       </div>
     </div>

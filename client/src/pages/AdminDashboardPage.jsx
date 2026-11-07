@@ -113,7 +113,7 @@ const AdminDashboardPage = () => {
     setEditingProductId(null);
     setProductForm({
       name: '',
-      brand: 'Amazon Basics',
+      brand: 'Cartzy Essentials',
       category: 'Electronics',
       price: '',
       originalPrice: '',
@@ -237,9 +237,9 @@ const AdminDashboardPage = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black tracking-tight">
-                amazon<span className="text-amber-400 text-sm">seller central</span>
+                Cart<span className="text-orange-400">zy</span> <span className="text-sm font-semibold text-slate-300">Seller Central</span>
               </span>
-              <span className="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-bold px-2 py-0.5 rounded uppercase">
+              <span className="bg-orange-500/20 text-orange-300 border border-orange-400/30 text-[10px] font-bold px-2 py-0.5 rounded uppercase">
                 Admin Console
               </span>
             </div>
@@ -409,7 +409,7 @@ const AdminDashboardPage = () => {
                               <p className="font-semibold text-gray-900 line-clamp-1 max-w-xs">
                                 {p.name}
                               </p>
-                              <p className="text-[11px] text-gray-500">{p.brand || 'Amazon'}</p>
+                              <p className="text-[11px] text-gray-500">{p.brand || 'Cartzy'}</p>
                             </div>
                           </div>
                         </td>
@@ -620,7 +620,7 @@ const AdminDashboardPage = () => {
             {/* Modal Header */}
             <div className="px-6 py-4 bg-[#131921] text-white flex items-center justify-between">
               <h3 className="font-bold text-base">
-                {editingProductId ? 'Edit Product' : 'Add New Product to Amazon'}
+                {editingProductId ? 'Edit Product' : 'Add New Product to Cartzy'}
               </h3>
               <button
                 onClick={() => setIsProductModalOpen(false)}

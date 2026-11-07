@@ -144,8 +144,8 @@ const ProductDetailPage = () => {
           {/* Center Column: Product Specs & Features (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div>
-              <span className="text-xs font-semibold text-amazon-link hover:underline cursor-pointer uppercase tracking-wider">
-                Visit the {product.brand || 'Amazon'} Store
+              <span className="text-xs font-semibold text-orange-600 hover:underline cursor-pointer uppercase tracking-wider">
+                Visit the {product.brand || 'Cartzy'} Store
               </span>
               <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 mt-1 leading-snug">
                 {product.name}
@@ -310,7 +310,7 @@ const ProductDetailPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Ships from</span>
-                  <span className="text-gray-800 font-medium">Amazon</span>
+                  <span className="text-gray-800 font-medium">Cartzy</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Sold by</span>

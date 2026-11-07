@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      default: 'Amazon'
+      default: 'Cartzy'
     },
     category: {
       type: String,

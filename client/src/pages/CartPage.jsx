@@ -42,7 +42,7 @@ const CartPage = () => {
           <div className="w-20 h-20 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <ShoppingBag className="w-10 h-10" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Amazon Cart is empty</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Cartzy Cart is empty</h2>
           <p className="text-sm text-gray-500 max-w-md mx-auto mb-6">
             Your shopping cart is waiting. Give it purpose – fill it with groceries, clothing,
             household supplies, electronics and more.

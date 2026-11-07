@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Flame, Tag, Menu } from 'lucide-react';
 
 const SubNav = () => {
   const navigate = useNavigate();
 
-  const categories = [
-    { label: 'All', query: '' },
-    { label: "Today's Deals", query: 'deals' },
+  const links = [
+    { label: 'All', query: '', icon: null },
+    { label: "Today's Deals", query: 'deals', highlight: true },
     { label: 'Mobiles', query: 'Mobiles & Tablets' },
     { label: 'Laptops', query: 'Laptops & Computers' },
     { label: 'Audio', query: 'Audio & Headphones' },
@@ -18,43 +18,36 @@ const SubNav = () => {
     { label: 'Books', query: 'Books' },
   ];
 
-  const handleCategoryClick = (query) => {
-    if (!query) {
-      navigate('/');
-    } else if (query === 'deals') {
-      navigate('/?sortBy=rating');
-    } else {
-      navigate(`/?category=${encodeURIComponent(query)}`);
-    }
+  const handleClick = (query) => {
+    if (!query) return navigate('/');
+    if (query === 'deals') return navigate('/?sortBy=rating');
+    navigate(`/?category=${encodeURIComponent(query)}`);
   };
 
   return (
-    <nav className="bg-[#232f3e] text-white text-xs sm:text-sm font-medium border-t border-gray-700/50 overflow-x-auto no-scrollbar">
-      <div className="max-w-[1500px] mx-auto px-3 sm:px-4 flex items-center justify-between whitespace-nowrap min-w-max">
-        <div className="flex items-center gap-1 sm:gap-3 py-1.5">
+    <nav className="bg-[#162040] text-white text-xs font-semibold border-t border-white/5 overflow-x-auto no-scrollbar">
+      <div className="max-w-[1500px] mx-auto px-3 sm:px-5 flex items-center gap-0.5 whitespace-nowrap py-0.5">
+        {links.map((item) => (
           <button
-            onClick={() => handleCategoryClick('')}
-            className="flex items-center gap-1 px-2 py-1 hover:border border-white rounded transition font-bold"
+            key={item.label}
+            onClick={() => handleClick(item.query)}
+            className={`px-3 py-2 rounded-md transition flex items-center gap-1 ${
+              item.highlight
+                ? 'text-orange-400 hover:text-orange-300 font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-white/10'
+            }`}
           >
-            <Menu className="w-4 h-4" />
-            <span>All</span>
+            {item.highlight && <Flame className="w-3 h-3 fill-orange-400" />}
+            {item.label}
           </button>
+        ))}
 
-          {categories.slice(1).map((item) => (
-            <button
-              key={item.label}
-              onClick={() => handleCategoryClick(item.query)}
-              className="px-2 py-1 hover:border border-white rounded transition text-gray-200 hover:text-white"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="hidden xl:flex items-center gap-2 text-xs text-amber-300 font-bold px-2">
-          <span>Amazon Great Republic Day Sale</span>
-          <span className="bg-amber-400 text-gray-950 px-2 py-0.5 rounded text-[11px] font-black">
-            LIVE NOW
+        {/* Right-side promo tag */}
+        <div className="ml-auto hidden xl:flex items-center gap-2 pl-4 border-l border-white/10">
+          <Tag className="w-3.5 h-3.5 text-orange-400" />
+          <span className="text-orange-300 font-bold text-[11px]">Mega Sale — Up to 70% Off</span>
+          <span className="bg-orange-500 text-white px-2 py-0.5 rounded text-[10px] font-black animate-pulse-soft">
+            LIVE
           </span>
         </div>
       </div>

@@ -291,8 +291,8 @@ const seedData = async () => {
 
     // Create Admin User
     const adminUser = await User.create({
-      name: 'Amazon Admin',
-      email: 'admin@amazon.com',
+      name: 'Cartzy Admin',
+      email: 'admin@cartzy.com',
       password: 'admin123',
       phone: '+91 9876543210',
       address: {
@@ -308,7 +308,7 @@ const seedData = async () => {
     // Create Demo Customer
     const normalUser = await User.create({
       name: 'Rahul Sharma',
-      email: 'user@amazon.com',
+      email: 'user@cartzy.com',
       password: 'user123',
       phone: '+91 9123456780',
       address: {
@@ -322,8 +322,8 @@ const seedData = async () => {
     });
 
     console.log(' Users created:');
-    console.log(`   Admin: admin@amazon.com / admin123`);
-    console.log(`   Customer: user@amazon.com / user123`);
+    console.log(`   Admin: admin@cartzy.com / admin123`);
+    console.log(`   Customer: user@cartzy.com / user123`);
 
     // Insert Products
     const createdProducts = await Product.insertMany(sampleProducts);
@@ -348,7 +348,15 @@ const seedData = async () => {
           qty: 1
         }
       ],
-      shippingAddress: normalUser.address,
+      shippingAddress: {
+        fullName: normalUser.name,
+        phone: normalUser.phone,
+        street: normalUser.address.street,
+        city: normalUser.address.city,
+        state: normalUser.address.state,
+        postalCode: normalUser.address.postalCode,
+        country: normalUser.address.country
+      },
       paymentMethod: 'Credit/Debit Card',
       itemsPrice: createdProducts[0].price + createdProducts[3].price,
       shippingPrice: 0,

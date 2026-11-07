@@ -30,8 +30,8 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: 'An account with this email already exists' });
     }
 
-    // Default to admin if email contains admin@amazon or if configured
-    const isAdmin = req.body.isAdmin || email.toLowerCase().includes('admin@amazon.com');
+    // Default to admin if email contains admin@cartzy or if configured
+    const isAdmin = req.body.isAdmin || email.toLowerCase().includes('admin@cartzy.com');
 
     const user = await User.create({
       name,

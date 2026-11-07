@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('userInfo');
-    addToast('Signed out of Amazon successfully.', 'info');
+    addToast('Signed out of Cartzy successfully.', 'info');
   };
 
   const updateProfile = async (updateData) => {

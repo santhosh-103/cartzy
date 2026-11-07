@@ -1,90 +1,92 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ShoppingCart, Shield, Truck, RotateCcw, Headphones } from 'lucide-react';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const links = {
+    'Get to Know Us': ['About Cartzy', 'Careers', 'Press & Media', 'Investor Relations'],
+    'Make Money with Us': ['Sell on Cartzy', 'Become an Affiliate', 'Advertise Products', 'Fulfilment by Cartzy'],
+    'Cartzy Payment': ['EMI & No-Cost EMI', 'Pay on Delivery', 'Cartzy Pay Wallet', 'Gift Cards'],
+    'Let Us Help You': ['Your Account', 'Returns Centre', 'Help & Customer Service', 'Cartzy App Download'],
   };
 
+  const perks = [
+    { icon: Truck, label: 'Free Delivery', sub: 'On orders above ₹499' },
+    { icon: Shield, label: 'Secure Payments', sub: '100% protected checkout' },
+    { icon: RotateCcw, label: 'Easy Returns', sub: '7-day hassle-free returns' },
+    { icon: Headphones, label: '24/7 Support', sub: 'Always here to help' },
+  ];
+
   return (
-    <footer className="mt-16 bg-[#232f3e] text-gray-300 text-sm">
-      {/* Back to top */}
-      <button
-        onClick={scrollToTop}
-        className="w-full py-3.5 bg-[#37475a] hover:bg-[#485769] text-white text-xs font-semibold text-center transition"
-      >
-        Back to top
-      </button>
-
-      {/* Main Footer Links */}
-      <div className="max-w-[1200px] mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-xs leading-relaxed">
-        <div>
-          <h4 className="font-bold text-white text-sm mb-3">Get to Know Us</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:underline text-gray-300">About Amazon</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Careers</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Press Releases</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Amazon Science</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-white text-sm mb-3">Connect with Us</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:underline text-gray-300">Facebook</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Twitter</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Instagram</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-white text-sm mb-3">Make Money with Us</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:underline text-gray-300">Sell on Amazon</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Sell under Amazon Accelerator</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Protect and Build Your Brand</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Amazon Global Selling</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Become an Affiliate</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Fulfilment by Amazon</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-white text-sm mb-3">Let Us Help You</h4>
-          <ul className="space-y-2">
-            <li><Link to="/orders" className="hover:underline text-gray-300">Your Account</Link></li>
-            <li><Link to="/orders" className="hover:underline text-gray-300">Returns Centre</Link></li>
-            <li><a href="#" className="hover:underline text-gray-300">100% Purchase Protection</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Amazon App Download</a></li>
-            <li><a href="#" className="hover:underline text-gray-300">Help</a></li>
-          </ul>
+    <footer className="mt-16">
+      {/* Perks bar */}
+      <div className="bg-[#0f1c3a] text-white border-t border-white/10">
+        <div className="max-w-[1200px] mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {perks.map(({ icon: Icon, label, sub }) => (
+            <div key={label} className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center flex-shrink-0">
+                <Icon className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-bold text-sm text-white">{label}</p>
+                <p className="text-[11px] text-slate-400">{sub}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-700 bg-[#131921] py-8 text-center text-xs text-gray-400">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="text-xl font-black text-white tracking-tight">
-            amazon<span className="text-amber-400 text-xs">.in</span>
-          </span>
-          <span className="border border-gray-600 rounded px-2 py-0.5 text-[11px] text-gray-300 ml-4 flex items-center gap-1">
-            <span>🌐 English</span>
-          </span>
-          <span className="border border-gray-600 rounded px-2 py-0.5 text-[11px] text-gray-300 flex items-center gap-1">
-            <span>🇮🇳 India</span>
-          </span>
+      {/* Back to top */}
+      <button
+        onClick={scrollToTop}
+        className="w-full py-3 bg-[#1a2a52] hover:bg-[#213360] text-white text-xs font-semibold text-center transition"
+      >
+        ↑ Back to top
+      </button>
+
+      {/* Main footer links */}
+      <div className="bg-[#162040] text-slate-300 text-xs">
+        <div className="max-w-[1200px] mx-auto px-6 py-12 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {Object.entries(links).map(([heading, items]) => (
+            <div key={heading}>
+              <h4 className="font-bold text-white text-sm mb-4">{heading}</h4>
+              <ul className="space-y-2.5">
+                {items.map(item => (
+                  <li key={item}>
+                    <a href="#" className="hover:text-orange-400 transition-colors leading-relaxed">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="bg-[#0f1c3a] py-8 border-t border-white/5 text-center text-xs text-slate-500">
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 bg-orange-500 rounded-lg flex items-center justify-center">
+              <ShoppingCart className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-xl font-black text-white">
+              Cart<span className="text-orange-400">zy</span>
+            </span>
+          </div>
+          <span className="border border-slate-700 rounded px-2 py-0.5 text-[11px] text-slate-400">🌐 English</span>
+          <span className="border border-slate-700 rounded px-2 py-0.5 text-[11px] text-slate-400">🇮🇳 India</span>
         </div>
 
-        <div className="max-w-3xl mx-auto px-4 space-y-1">
-          <p className="flex justify-center flex-wrap gap-4 text-[11px]">
-            <a href="#" className="hover:underline">Conditions of Use & Sale</a>
-            <a href="#" className="hover:underline">Privacy Notice</a>
-            <a href="#" className="hover:underline">Interest-Based Ads</a>
-          </p>
-          <p className="text-[11px] text-gray-500 mt-2">
-            © 1996-{new Date().getFullYear()}, Amazon.com, Inc. or its affiliates. All rights reserved.
-          </p>
-        </div>
+        <p className="text-[11px] text-slate-600 mb-2">
+          <a href="#" className="hover:text-slate-400 mx-2">Conditions of Use</a>
+          <a href="#" className="hover:text-slate-400 mx-2">Privacy Notice</a>
+          <a href="#" className="hover:text-slate-400 mx-2">Interest-Based Ads</a>
+        </p>
+        <p className="text-[11px] text-slate-700">
+          © {new Date().getFullYear()} Cartzy. All rights reserved. Shop Smarter.
+        </p>
       </div>
     </footer>
   );

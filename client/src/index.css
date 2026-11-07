@@ -2,59 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #eaeded;
-  color: #0f1111;
-  overflow-x: hidden;
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #fbbf24;
+    color: #0f172a;
+  }
 }
 
-/* Amazon standard button styles */
-.amazon-btn-primary {
-  background: #ffd814;
-  border-color: #fcd200;
-  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
-  transition: all 0.15s ease-in-out;
-}
-.amazon-btn-primary:hover {
-  background: #f7ca00;
-  border-color: #f2c200;
+@layer components {
+  /* ---- Cartzy Button Styles ---- */
+  .cz-btn-primary {
+    @apply bg-orange-500 hover:bg-orange-600 active:scale-[0.97] text-white font-bold rounded-lg px-5 py-2.5 text-sm shadow-sm transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  .cz-btn-amber {
+    @apply bg-amber-400 hover:bg-amber-500 active:scale-[0.97] text-gray-900 font-bold rounded-full border border-amber-500 px-5 py-2 text-sm shadow-sm transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  .cz-btn-outline {
+    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-lg border border-slate-300 px-5 py-2.5 text-sm shadow-sm transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+
+  /* ---- Cartzy Card ---- */
+  .cz-card {
+    @apply bg-white rounded-2xl border border-slate-200 shadow-card hover:shadow-card-hover transition-shadow duration-200;
+  }
+
+  /* ---- Links ---- */
+  .cz-link {
+    @apply text-sky-500 hover:text-sky-600 hover:underline transition-colors;
+  }
+
+  /* ---- Badge helpers ---- */
+  .cz-badge {
+    @apply inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md;
+  }
+  .cz-badge-orange  { @apply cz-badge bg-orange-500 text-white; }
+  .cz-badge-red     { @apply cz-badge bg-red-600 text-white; }
+  .cz-badge-dark    { @apply cz-badge bg-slate-800 text-white; }
+  .cz-badge-amber   { @apply cz-badge bg-amber-500 text-gray-900; }
+  .cz-badge-green   { @apply cz-badge bg-emerald-600 text-white; }
 }
 
-.amazon-btn-secondary {
-  background: #ffa41c;
-  border-color: #ff8f00;
-  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
-  transition: all 0.15s ease-in-out;
-}
-.amazon-btn-secondary:hover {
-  background: #fa8900;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .text-gradient-orange {
+    background: linear-gradient(135deg, #f97316, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-nav-gradient {
+    background: linear-gradient(180deg, #0f1c3a 0%, #162040 100%);
+  }
+
+  .glass-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
 }
 
-.amazon-btn-outline {
-  background: #ffffff;
-  border: 1px solid #d5d9d9;
-  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
-  transition: all 0.15s ease-in-out;
-}
-.amazon-btn-outline:hover {
-  background: #f7fafa;
-  border-color: #d5d9d9;
-}
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+/* ---- Input focus ring ---- */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(249,115,22,0.35);
 }

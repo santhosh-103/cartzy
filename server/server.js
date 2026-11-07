@@ -37,14 +37,14 @@ app.use('/api/upload', uploadRoutes);
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    message: 'Amazon Backend API is running smoothly',
+    message: 'Cartzy Backend API is running smoothly',
     timestamp: new Date().toISOString()
   });
 });
 
 // Root welcome endpoint
 app.get('/', (req, res) => {
-  res.send('Amazon E-Commerce REST API is running. Access endpoints via /api/...');
+  res.send('Cartzy E-Commerce REST API is running. Access endpoints via /api/...');
 });
 
 // Error handling middleware

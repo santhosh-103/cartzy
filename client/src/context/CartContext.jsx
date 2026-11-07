@@ -5,13 +5,13 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem('amazonCart');
+    const saved = localStorage.getItem('cartzyCart');
     return saved ? JSON.parse(saved) : [];
   });
   const { addToast } = useToast();
 
   useEffect(() => {
-    localStorage.setItem('amazonCart', JSON.stringify(cartItems));
+    localStorage.setItem('cartzyCart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product, qty = 1) => {
@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem('amazonCart');
+    localStorage.removeItem('cartzyCart');
   };
 
   // Calculations
@@ -91,7 +91,7 @@ export const CartProvider = ({ children }) => {
   );
   const totalSavings = Math.max(0, originalTotal - itemsPrice);
   const shippingPrice = itemsPrice >= 499 || itemsCount === 0 ? 0 : 40;
-  const taxPrice = 0; // Inclusive of all taxes on Amazon India
+  const taxPrice = 0; // Inclusive of all taxes on Cartzy India
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   return (
