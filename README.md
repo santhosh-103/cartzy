@@ -264,7 +264,7 @@ CARTZY demonstrates practical full-stack development skills, including:
 
 **Santhosh**
 
-GitHub: https://github.com/YOUR_USERNAME
+GitHub: https://github.com/santhosh-103
 
 ---
 
