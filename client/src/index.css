@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #eaeded;
+  color: #0f1111;
+  overflow-x: hidden;
+}
+
+/* Amazon standard button styles */
+.amazon-btn-primary {
+  background: #ffd814;
+  border-color: #fcd200;
+  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+  transition: all 0.15s ease-in-out;
+}
+.amazon-btn-primary:hover {
+  background: #f7ca00;
+  border-color: #f2c200;
+}
+
+.amazon-btn-secondary {
+  background: #ffa41c;
+  border-color: #ff8f00;
+  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+  transition: all 0.15s ease-in-out;
+}
+.amazon-btn-secondary:hover {
+  background: #fa8900;
+}
+
+.amazon-btn-outline {
+  background: #ffffff;
+  border: 1px solid #d5d9d9;
+  box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+  transition: all 0.15s ease-in-out;
+}
+.amazon-btn-outline:hover {
+  background: #f7fafa;
+  border-color: #d5d9d9;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "amazon-ecommerce-clone",
+  "version": "1.0.0",
+  "description": "Full-stack Amazon.in E-Commerce Clone built with React, Node.js, Express, MongoDB, and JWT Authentication",
+  "main": "server/server.js",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "server:start": "npm --prefix server start",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "seed": "npm --prefix server run seed"
+  },
+  "keywords": [
+    "amazon-clone",
+    "ecommerce",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "jwt",
+    "tailwind"
+  ],
+  "author": "",
+  "license": "ISC"
+}
